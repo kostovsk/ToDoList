@@ -32,6 +32,8 @@ namespace ToDoList.Pages.ListTypes
             return Page();
          }
 
+         ListType.Date = DateTime.Now;
+
          _db.ListType.Add(ListType);
          await _db.SaveChangesAsync();
 
