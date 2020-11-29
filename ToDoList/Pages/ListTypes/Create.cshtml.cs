@@ -32,9 +32,21 @@ namespace ToDoList.Pages.ListTypes
             return Page();
          }
 
-         ListType.Date = DateTime.Now;
+         //ListType.Date = DateTime.Now;
 
-         _db.ListType.Add(ListType);
+         var todo = new ListType
+         {
+            Name = "Test list",
+            Date = DateTime.Now,
+            ListItems = new List<Item>
+            {
+               new Item { ItemEntry = "Hamlet"},
+               new Item { ItemEntry = "Othello" },
+               new Item { ItemEntry = "MacBeth" }
+            }
+         };
+
+         _db.ListType.Add(todo);
          await _db.SaveChangesAsync();
 
          return RedirectToPage("Index");
