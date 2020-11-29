@@ -10,7 +10,7 @@ using ToDoList.Data;
 namespace ToDoList.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201128033130_addListTypeToDb")]
+    [Migration("20201129181045_addListTypeToDb")]
     partial class addListTypeToDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -252,6 +252,7 @@ namespace ToDoList.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

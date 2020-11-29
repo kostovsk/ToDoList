@@ -4,16 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ToDoList.Data;
-using ToDoList.Models;
+using ToDoListApp.Data;
+using ToDoListApp.Models;
 
-namespace ToDoList.Pages.ListTypes
+namespace ToDoListApp.Pages.ListModels
 {
    public class CreateModel : PageModel
    {
       private readonly ApplicationDbContext _db;
       [BindProperty]
-      public ListType ListType { get; set; }
+      public ListModel ListModel { get; set; }
 
       public CreateModel(ApplicationDbContext db)
       {
@@ -32,24 +32,22 @@ namespace ToDoList.Pages.ListTypes
             return Page();
          }
 
-         ListType.Date = DateTime.Now;
+         ListModel.Date = DateTime.Now;
 
-         //var todo = new ListType
-         //{
-         //   Name = "Test list 3",
-         //   Date = DateTime.Now,
-         //   ListItems = new List<Item>
-         //   {
-         //      new Item { ItemEntry = "Homework"},
-         //      new Item { ItemEntry = "Excercise" },
-         //      new Item { ItemEntry = "Eat" }
-         //   }
-         //};
-
-         _db.ListType.Add(ListType);
+         _db.ListModel.Add(ListModel);
          await _db.SaveChangesAsync();
 
          return RedirectToPage("Index");
+      }
+
+      public void OnPostAddEntry()
+      {
+         ListModel.ListItems.Add(new Item());
+      }
+
+      public void OnPostRemoveEntry(int index)
+      {
+         ListModel.ListItems.RemoveAt(index);
       }
    }
 }

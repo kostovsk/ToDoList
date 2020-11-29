@@ -1,0 +1,35 @@
+﻿@page
+@model ToDoListApp.Pages.ListModels.CreateModel
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<form method="post">
+    <div class="form-group">
+        <label for="ListMode.Name">Name</label>
+        <input type="text" class="form-control" asp-for="ListModel.Name">
+        <span asp-validation-for="ListModel.Name"></span>
+    </div>
+    @if (Model.ListModel != null)
+    {
+        for (int i = 0; i < Model.ListModel.ListItems.Count; i++)
+        {
+            <input asp-for="@i" type="hidden" />
+            <div class="form-group">
+                <label for="Name">Entry</label>
+                <input type="text" class="form-control" asp-for="ListModel.ListItems[i].Entry">
+            </div>
+
+            <button type="submit" asp-page-handler="removeentry" asp-route-index="@i">Remove Entry</button>
+        }
+    }
+
+    <button type="submit" asp-page-handler="addentry">Add Entry</button>
+
+    <button type="submit" asp-page-handler="submit" class="btn btn-primary">Submit</button>
+</form>
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

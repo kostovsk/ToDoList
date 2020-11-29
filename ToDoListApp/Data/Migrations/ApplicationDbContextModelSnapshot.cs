@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ToDoList.Data;
+using ToDoListApp.Data;
 
-namespace ToDoList.Data.Migrations
+namespace ToDoListApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -15,7 +15,7 @@ namespace ToDoList.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.10")
+                .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -219,27 +219,27 @@ namespace ToDoList.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ToDoList.Models.Item", b =>
+            modelBuilder.Entity("ToDoListApp.Models.Item", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ItemEntry")
+                    b.Property<string>("Entry")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ListTypeId")
+                    b.Property<int?>("ListModelId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ListTypeId");
+                    b.HasIndex("ListModelId");
 
                     b.ToTable("Item");
                 });
 
-            modelBuilder.Entity("ToDoList.Models.ListType", b =>
+            modelBuilder.Entity("ToDoListApp.Models.ListModel", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -255,7 +255,7 @@ namespace ToDoList.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ListType");
+                    b.ToTable("ListModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -309,11 +309,11 @@ namespace ToDoList.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ToDoList.Models.Item", b =>
+            modelBuilder.Entity("ToDoListApp.Models.Item", b =>
                 {
-                    b.HasOne("ToDoList.Models.ListType", null)
+                    b.HasOne("ToDoListApp.Models.ListModel", null)
                         .WithMany("ListItems")
-                        .HasForeignKey("ListTypeId");
+                        .HasForeignKey("ListModelId");
                 });
 #pragma warning restore 612, 618
         }

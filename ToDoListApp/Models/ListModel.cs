@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ToDoList.Models
+namespace ToDoListApp.Models
 {
-   public class ListType
+   public class ListModel
    {
       public int Id { get; set; }
       [Required]
@@ -14,7 +14,7 @@ namespace ToDoList.Models
       public DateTime Date { get; set; }
       public List<Item> ListItems { get; set; }
 
-      public ListType()
+      public ListModel()
       {
          this.ListItems = new List<Item>();
       }
