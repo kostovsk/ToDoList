@@ -10,10 +10,10 @@
 <div class="border backgroundwhite">
     <div class="row">
         <div class="col-6">
-            <h2 class="text-dark">My ToDo Lists</h2>
+            <h2 class="text">My Lists</h2>
         </div>
         <div class="col-6 text-right">
-            <a asp-page="Create" class="btn btn-success">
+            <a asp-page="Create" class="btn btn-outline-success">
                 Add New List
             </a>
         </div>
@@ -29,12 +29,14 @@
             <table class="table table-striped border">
                 <tr class="table-secondary">
                     <th>
-                        @Html.DisplayNameFor(m => m.ListModel[0].Name)
+                        <label>Name</label>
                     </th>
                     <th>
-                        @Html.DisplayNameFor(m => m.ListModel[0].Date)
+                        <label>Date Created</label>
                     </th>
-                    <th></th>
+                    <th>
+                        <label>Functions</label>
+                    </th>
                 </tr>
                 @foreach (var item in Model.ListModel)
                 {
@@ -43,9 +45,21 @@
                             @Html.DisplayFor(m => item.Name)
                         </td>
                         <td>
-
+                            @item.Date.ToString("MM/dd/yyyy")
                         </td>
-                        <td></td>
+                        <td style="width:150px">
+                            <div class="btn-group" role="group">
+                                <a class="btn btn-outline-info" asp-page="Edit" asp-route-Id="@item.Id">
+                                    Edit
+                                </a>
+                                <a class="btn btn-outline-secondary" asp-page="View" asp-route-Id="@item.Id">
+                                    View
+                                </a>
+                                <a class="btn btn-outline-danger" asp-page="Delete" asp-route-Id="@item.Id">
+                                    Delete
+                                </a>
+                            </div>
+                        </td>
                     </tr>
                 }
             </table>
