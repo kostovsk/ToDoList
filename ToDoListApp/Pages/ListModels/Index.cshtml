@@ -1,6 +1,54 @@
 ﻿@page
 @model ToDoListApp.Pages.ListModels.IndexModel
 @{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
+<br />
+<br />
+<div class="border backgroundwhite">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-dark">My ToDo Lists</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-page="Create" class="btn btn-success">
+                Add New List
+            </a>
+        </div>
+    </div>
+    <br />
+    <div>
+        @if (Model.ListModel.Count == 0)
+        {
+            <p>No lists exist. Please create a new one.</p>
+        }
+        else
+        {
+            <table class="table table-striped border">
+                <tr class="table-secondary">
+                    <th>
+                        @Html.DisplayNameFor(m => m.ListModel[0].Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(m => m.ListModel[0].Date)
+                    </th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model.ListModel)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => item.Name)
+                        </td>
+                        <td>
 
+                        </td>
+                        <td></td>
+                    </tr>
+                }
+            </table>
+        }
+    </div>
+</div>
