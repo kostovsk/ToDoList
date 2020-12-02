@@ -1,0 +1,68 @@
+@page
+@model ToDoListApp.Pages.ListModels.NewToDoList
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<div class="border backgroundwhite">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-dark">My Lists</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-page="Create" class="btn btn-outline-success">
+                Add New List
+            </a>
+        </div>
+    </div>
+    <br />
+    <div>
+        @if (Model.ArrayOfToDoLists.Count == 0)
+        {
+            <p>No lists exist. Please create a new one.</p>
+        }
+        else
+        {
+            <table class="table table-striped border">
+                <tr class="table-secondary">
+                    <th>
+                        <label>Name</label>
+                    </th>
+                    <th>
+                        <label>Date Created</label>
+                    </th>
+                    <th>
+                        <label>Functions</label>
+                    </th>
+                </tr>
+                @foreach (var item in Model.ArrayOfToDoLists)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => item.NAME)
+                        </td>
+                        <td>
+                            @item.DATE_CREATED.ToString("MM/dd/yyyy")
+                        </td>
+                        <td style="width:150px">
+                            <div class="btn-group" role="group">
+                                <a class="btn btn-outline-info" href="ListModels/Edit?Id=@item.LIST_ID.ToString()">
+                                    Edit
+                                </a>
+                                <a class="btn btn-outline-secondary" asp-page="View" asp-route-Id="@item.LIST_ID">
+                                    View
+                                </a>
+                                <a class="btn btn-outline-danger" asp-page="Delete" asp-route-Id="@item.LIST_ID">
+                                    Delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+    </div>
+</div>
