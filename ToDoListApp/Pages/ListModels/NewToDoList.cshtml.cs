@@ -8,21 +8,21 @@ using ToDoListApp.Models;
 
 namespace ToDoListApp.Pages.ListModels
 {
-    public class NewToDoList : PageModel
-    {
-        private readonly ApplicationDbContext _db;
+   public class NewToDoList : PageModel
+   {
+      private readonly ApplicationDbContext _db;
 
-        public NewToDoList(ApplicationDbContext db)
-        {
-            _db = db;
-        }
+      public NewToDoList(ApplicationDbContext db)
+      {
+         _db = db;
+      }
 
-        public IList<ToDoList> ArrayOfToDoLists { get; set; }
+      public IList<ToDoList> ArrayOfToDoLists { get; set; }
 
-        public async Task<IActionResult> OnGet()
-        {
-            ArrayOfToDoLists = await _db.ToDoList.ToListAsync();
-            return Page();
-        }
-    }
+      public async Task<IActionResult> OnGet()
+      {
+         ArrayOfToDoLists = await _db.ToDoList.ToListAsync();
+         return Page();
+      }
+   }
 }
