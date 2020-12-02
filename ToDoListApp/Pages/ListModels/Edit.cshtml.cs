@@ -21,7 +21,7 @@ namespace ToDoListApp.Pages.ListModels
 
       public ListModel TheCurrentList { get; set; }
 
-     
+      public Item items { get; set; }
 
       public async Task<IActionResult> OnGet()
       {
@@ -38,6 +38,12 @@ namespace ToDoListApp.Pages.ListModels
          {
             return RedirectToPage("Index");
          }
+
+         var id = Int32.Parse(idFromQueryString);
+
+         TheCurrentList = await _db.ListModel.FirstOrDefaultAsync(s => s.Id == id);
+
+         items = TheCurrentList.ListItems[id];
 
          return Page();
       }
