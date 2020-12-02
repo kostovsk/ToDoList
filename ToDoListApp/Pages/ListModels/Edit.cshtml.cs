@@ -34,6 +34,10 @@ namespace ToDoListApp.Pages.ListModels
             check for null, if null then redirect back to Index page with the ItemsList, 
             else convert 'idFromQueryString' to int and use the _db to find the item
           */
+         if (String.IsNullOrEmpty(idFromQueryString))
+         {
+            return RedirectToPage("Index");
+         }
 
          return Page();
       }
