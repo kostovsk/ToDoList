@@ -20,6 +20,7 @@ namespace ToDoListApp.Pages.ListModels
       }
       public IList<ToDoList> ArrayToDoList { get; set; }
 
+      public IList<Items> ArrayItems { get; set; }
 
 
       public async Task<IActionResult> OnGet()
@@ -39,6 +40,7 @@ namespace ToDoListApp.Pages.ListModels
          }
 
          ArrayToDoList = await _db.ToDoList.ToListAsync();
+         ArrayItems = await _db.Items.ToListAsync();
          
          return Page();
       }
