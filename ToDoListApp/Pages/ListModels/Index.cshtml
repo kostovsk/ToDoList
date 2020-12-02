@@ -49,7 +49,7 @@
                         </td>
                         <td style="width:150px">
                             <div class="btn-group" role="group">
-                                <a class="btn btn-outline-info" asp-page="Edit" asp-route-Id="@item.Id">
+                                <a class="btn btn-outline-info" href="ListModels/Edit?Id=@item.Id.ToString()">
                                     Edit
                                 </a>
                                 <a class="btn btn-outline-secondary" asp-page="View" asp-route-Id="@item.Id">
