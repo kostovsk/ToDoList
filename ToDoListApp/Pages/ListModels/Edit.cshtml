@@ -1,0 +1,48 @@
+﻿@page
+@model ToDoListApp.Pages.ListModels.EditModel
+@{
+
+    string testQueryStringID = null;
+    if (Request.Query.ContainsKey("Id"))
+    {
+        testQueryStringID = Request.Query["Id"].ToString();
+    }
+    else
+    {
+        testQueryStringID = "missing Id";
+
+    }
+
+
+
+}
+
+
+
+<style>
+    .sample-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        max-width: 18rem;
+        box-shadow: 7px 1rem 1rem 1px rgb(0 0 0 / 28%);
+        border: 1px solid #dadada;
+        border-radius: 4px;
+    }
+</style>
+
+
+
+
+
+<div class="container">
+    <div class="sample-box ">
+        The Id from the Query String is :
+        <h3>
+            @testQueryStringID
+        </h3>
+    </div>
+</div>
+
+
+

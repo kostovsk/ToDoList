@@ -1,0 +1,68 @@
+﻿@page
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<br />
+<br />
+<div class="border backgroundwhite">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text">My Items</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a href="" class="btn btn-outline-success">
+               
+            </a>
+        </div>
+    </div>
+    <br />
+    <div class="container">
+        <div class="list-group">
+            <div class="list-group-item">
+
+
+                <input type="checkbox" onchange="getCheckboxes()" name="item1" id="item1" value="" />
+                <label for="item1">
+                    Item 1
+                </label>
+
+
+            </div>
+
+            <div class="list-group-item">
+
+                <input type="checkbox" onchange="getCheckboxes()" name="item2"  id="item2"  value="" />
+                <label for="item2">
+                    item 2
+                </label>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+
+
+
+    function getCheckboxes() {
+
+  
+        var theCheckboxes = document.querySelectorAll('input[type=checkbox]');
+
+        for (var i = 0; i < theCheckboxes.length; i++) {
+            var cBox = theCheckboxes[i];
+
+            if (cBox.checked) {
+                console.log("Checkbox with id: " + cBox.id + " is checked");
+            } else {
+                console.log("Checkbox with id: " + cBox.id + " is NOT checked");
+            }
+        }
+    }
+</script>
