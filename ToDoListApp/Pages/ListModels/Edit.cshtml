@@ -13,7 +13,7 @@
 
     }
 
-    
+
 
 }
 
@@ -63,6 +63,9 @@
         {
             <table class="table table-striped border">
                 <tr class="table-secondary">
+                    <th style="width:20px">
+                        <label>Select</label>
+                    </th>
                     <th>
                         <label>Id</label>
                     </th>
@@ -72,14 +75,20 @@
                 </tr>
                 @foreach (var item in Model.ArrayItems)
                 {
-                    <tr>
-                        <td>
-                            @item.ITEM_ID
-                        </td>
-                        <td>
-                            @item.ITEM
-                        </td>
-                    </tr>
+                    if (item.LIST_ID == Int32.Parse(testQueryStringID))
+                    {
+                        <tr>
+                            <td style="width:20px">
+                                <input type="checkbox" />
+                            </td>
+                            <td>
+                                @item.ITEM_ID
+                            </td>
+                            <td>
+                                @item.ITEM
+                            </td>
+                        </tr>
+                    }
                 }
             </table>
         }
