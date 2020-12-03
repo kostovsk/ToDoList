@@ -39,7 +39,7 @@ namespace ToDoListApp.Pages.ListModels
             return RedirectToPage("Index");
          }
 
-         ArrayToDoList = await _db.ToDoList.ToListAsync();
+         ArrayToDoList = await _db.ToDoList.ToListAsync(); 
          ArrayItems = await _db.Items.ToListAsync();
          
          return Page();

@@ -8,8 +8,8 @@ namespace ToDoListApp.Models
 {
    public class Items
    {
-      public int ITEM_ID { get; set; }
       [Key]
+      public int ITEM_ID { get; set; }
       public int LIST_ID { get; set; }
       public string ITEM { get; set; }
    }
