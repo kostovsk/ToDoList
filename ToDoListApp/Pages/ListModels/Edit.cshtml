@@ -13,7 +13,7 @@
 
     }
 
-
+    
 
 }
 
@@ -47,10 +47,41 @@
 <br />
 <br />
 <br />
-<div class="container">
-    <div class="sample-box">
-        <h3>
-            
-        </h3>
+<div class="border backgroundwhite">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-dark">List Items</h2>
+        </div>
+    </div>
+    <br />
+    <div>
+        @if (Model.ArrayItems.Count == 0)
+        {
+            <p>No lists exist. Please create a new one.</p>
+        }
+        else
+        {
+            <table class="table table-striped border">
+                <tr class="table-secondary">
+                    <th>
+                        <label>Id</label>
+                    </th>
+                    <th>
+                        <label>Item</label>
+                    </th>
+                </tr>
+                @foreach (var item in Model.ArrayItems)
+                {
+                    <tr>
+                        <td>
+                            @item.ITEM_ID
+                        </td>
+                        <td>
+                            @item.ITEM
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
     </div>
 </div>
