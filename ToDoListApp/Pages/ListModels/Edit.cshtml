@@ -1,7 +1,6 @@
 ﻿@page
 @model ToDoListApp.Pages.ListModels.EditModel
 @{
-
     string testQueryStringID = null;
     if (Request.Query.ContainsKey("Id"))
     {
@@ -12,9 +11,6 @@
         testQueryStringID = "missing Id";
 
     }
-
-
-
 }
 
 
@@ -92,5 +88,10 @@
                 }
             </table>
         }
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <a class="btn btn-outline-info" href="NewToDoList">Back to Lists</a>
+        </div>
     </div>
 </div>

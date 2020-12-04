@@ -1,13 +1,70 @@
 ﻿@page
 @model ToDoListApp.Pages.ListModels.ViewModel
 @{
-    ViewData["Title"] = "Details";
-    Layout = "~/Pages/Shared/_Layout.cshtml";
+   string testQueryStringID = null;
+   if (Request.Query.ContainsKey("Id"))
+   {
+       testQueryStringID = Request.Query["Id"].ToString();
+   }
+   else
+   {
+       testQueryStringID = "missing Id";
+
+   }
 }
 
 <br />
-<h2 class="text-dark">View List</h2>
 <br />
-<form method="post">
-
-</form>
+<div class="border backgroundwhite">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-dark">My Items</h2>
+        </div>
+    </div>
+    <br />
+    <div>
+        @if (Model.ArrayItems.Count == 0)
+        {
+            <p>No items exist in the list. Please add a new item.</p>
+            //<a href="" class="btn btn-outline-success">Add Item</a>
+        }
+        else
+        {
+            <table class="table table-striped border">
+                <tr class="table-secondary">
+                    <th style="width:20px">
+                        <label>Select</label>
+                    </th>
+                    <th>
+                        <label>Id</label>
+                    </th>
+                    <th>
+                        <label>Item</label>
+                    </th>
+                </tr>
+                @foreach (var item in Model.ArrayItems)
+                {
+                    if (item.LIST_ID == Int32.Parse(testQueryStringID))
+                    {
+                        <tr>
+                            <td style="width:20px">
+                                <input type="checkbox" />
+                            </td>
+                            <td>
+                                @item.ITEM_ID
+                            </td>
+                            <td>
+                                @item.ITEM
+                            </td>
+                        </tr>
+                    }
+                }
+            </table>
+        }
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <a class="btn btn-outline-info" href="NewToDoList">Back to Lists</a>
+        </div>
+    </div>
+</div>
