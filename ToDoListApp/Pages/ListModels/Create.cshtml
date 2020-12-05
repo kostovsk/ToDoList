@@ -8,27 +8,27 @@
 <form method="post">
     <div class="form-group">
         <label for="ListMode.Name">Name</label>
-        <input type="text" class="form-control" asp-for="ListModel.Name">
-        <span asp-validation-for="ListModel.Name"></span>
+        <input type="text" class="form-control" asp-for="ToDoList.NAME">
+        <span asp-validation-for="ToDoList.NAME"></span>
     </div>
-    @if (Model.ListModel != null)
+    @if (Model.ToDoList != null)
     {
-        for (int i = 0; i < Model.ListModel.ListItems.Count; i++)
-        {
-            <input asp-for="@i" type="hidden" />
-            <div class="form-group">
-                <label for="Name">Entry</label>
-                <input type="text" class="form-control" asp-for="ListModel.ListItems[i].Entry">
-            </div>
+        <input asp-for="ToDoList.LIST_ID" type="hidden" />
+        <div class="form-group">
+            <label for="Name">Entry</label>
+            <input type="text" class="form-control" asp-for="Item.ITEM">
+        </div>
 
-            <button type="submit" asp-page-handler="removeentry" asp-route-index="@i">Remove Entry</button>
-        }
+        <button type="submit" class="btn btn-outline-danger" asp-page-handler="removeentry">Remove Entry</button>
     }
-
-    <button type="submit" asp-page-handler="addentry">Add Entry</button>
-
-    <button type="submit" asp-page-handler="submit" class="btn btn-primary">Submit</button>
+    <div class="btn-group">
+        <button type="submit" class="btn btn-outline-success" asp-page-handler="addentry">Add Entry</button>
+    </div>
+    <div class="btn-group">
+        <button type="submit" asp-page-handler="submit" class="btn btn-outline-primary">Submit</button>
+    </div>
 </form>
+
 
 @section Scripts{
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }

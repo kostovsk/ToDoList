@@ -12,13 +12,17 @@ namespace ToDoListApp.Pages.ListModels
    public class CreateModel : PageModel
    {
       private readonly ApplicationDbContext _db;
-      [BindProperty]
-      public ListModel ListModel { get; set; }
 
       public CreateModel(ApplicationDbContext db)
       {
          _db = db;
       }
+
+      
+      public ToDoList ToDoList { get; set; }
+      [BindProperty]
+      public Items Item { get; set; }
+      public IList<Items> ArrayItems { get; set; }
 
       public IActionResult OnGet()
       {
@@ -32,22 +36,26 @@ namespace ToDoListApp.Pages.ListModels
             return Page();
          }
 
-         ListModel.Date = DateTime.Now;
+         ToDoList.DATE_CREATED = DateTime.Now;
 
-         _db.ListModel.Add(ListModel);
+         _db.ToDoList.Add(ToDoList);
+         foreach (var item in ArrayItems)
+         {
+            _db.Items.Add(item);
+         }
          await _db.SaveChangesAsync();
 
-         return RedirectToPage("Index");
+         return RedirectToPage("NewToDoList");
       }
 
       public void OnPostAddEntry()
       {
-         ListModel.ListItems.Add(new Item());
+         ArrayItems.Add(Item);
       }
 
       public void OnPostRemoveEntry(int index)
       {
-         ListModel.ListItems.RemoveAt(index);
+         ArrayItems.RemoveAt(index);
       }
    }
 }
