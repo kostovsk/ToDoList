@@ -11,6 +11,15 @@
        testQueryStringID = "missing Id";
 
    }
+
+   Boolean itemInArrayItems = true;
+   foreach (var item in Model.ArrayItems)
+   {
+       if (item.LIST_ID == Int32.Parse(testQueryStringID))
+       {
+           itemInArrayItems = false;
+       }
+   }
 }
 
 <br />
@@ -18,44 +27,60 @@
 <div class="border backgroundwhite">
     <div class="row">
         <div class="col-6">
-            <h2 class="text-dark">My Items</h2>
+            @foreach (var item in Model.ArrayToDoList)
+            {
+                if (item.LIST_ID == Int32.Parse(testQueryStringID))
+                {
+                    <h2 class="text-dark">@item.NAME</h2>
+                }
+            }
         </div>
     </div>
     <br />
     <div>
-        @if (Model.ArrayItems.Count == 0)
+        @if (itemInArrayItems)
         {
-            <p>No items exist in the list. Please add a new item.</p>
-            //<a href="" class="btn btn-outline-success">Add Item</a>
+            <div class="border-info">
+                <div class="col-6">
+                    <h5 class="text">No items exist. Please add new items.</h5>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-6">
+                    <a href="" class="btn btn-outline-success">Add item</a>
+                </div>
+            </div>
         }
         else
         {
-            <table class="table table-striped border">
-                <tr class="table-secondary">
-                    <th>
-                        <label>Id</label>
-                    </th>
-                    <th>
-                        <label>Item</label>
-                    </th>
-                </tr>
-                @foreach (var item in Model.ArrayItems)
+        <table class="table table-striped border">
+            <tr class="table-secondary">
+                <th>
+                    <label>Id</label>
+                </th>
+                <th>
+                    <label>Item</label>
+                </th>
+            </tr>
+            @foreach (var item in Model.ArrayItems)
+            {
+                if (item.LIST_ID == Int32.Parse(testQueryStringID))
                 {
-                    if (item.LIST_ID == Int32.Parse(testQueryStringID))
-                    {
-                        <tr>
-                            <td>
-                               @item.ITEM_ID
-                            </td>
-                            <td>
-                                @item.ITEM
-                            </td>
-                        </tr>
-                    }
+                    <tr>
+                        <td>
+                            @item.ITEM_ID
+                        </td>
+                        <td>
+                            @item.ITEM
+                        </td>
+                    </tr>
                 }
-            </table>
+            }
+        </table>
         }
     </div>
+    <br/>
     <div class="row">
         <div class="col-6">
             <a class="btn btn-outline-info" href="NewToDoList">Back to Lists</a>

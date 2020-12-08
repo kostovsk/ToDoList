@@ -1,16 +1,25 @@
 ﻿@page
 @model ToDoListApp.Pages.ListModels.EditModel
 @{
-    string testQueryStringID = null;
-    if (Request.Query.ContainsKey("Id"))
-    {
-        testQueryStringID = Request.Query["Id"].ToString();
-    }
-    else
-    {
-        testQueryStringID = "missing Id";
+   string testQueryStringID = null;
+   if (Request.Query.ContainsKey("Id"))
+   {
+       testQueryStringID = Request.Query["Id"].ToString();
+   }
+   else
+   {
+       testQueryStringID = "missing Id";
 
-    }
+   }
+
+   Boolean itemInArrayItems = true;
+   foreach (var item in Model.ArrayItems)
+   {
+       if (item.LIST_ID == Int32.Parse(testQueryStringID))
+       {
+           itemInArrayItems = false;
+       }
+   }
 }
 
 
@@ -42,18 +51,39 @@
 
 <br />
 <br />
-<br />
 <div class="border backgroundwhite">
     <div class="row">
         <div class="col-6">
-            <h2 class="text-dark">List Items</h2>
+            @foreach (var item in Model.ArrayToDoList)
+            {
+                if (item.LIST_ID == Int32.Parse(testQueryStringID))
+                {
+                    <h2 class="text-dark">@item.NAME</h2>
+                }
+            }
         </div>
     </div>
     <br />
     <div>
-        @if (Model.ArrayItems.Count == 0)
+        @if (itemInArrayItems)
         {
-            <p>No lists exist. Please create a new one.</p>
+            <div class="border-info">
+                <div class="col-6">
+                    <h5 class="text">No items exist. Please add new items.</h5>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-6">
+                    @foreach (var item in Model.ArrayToDoList)
+                    {
+                        if (item.LIST_ID == Int32.Parse(testQueryStringID))
+                        {
+                            <a href="AddItem?Id=@item.LIST_ID.ToString()" class="btn btn-outline-success">Add item</a>
+                        }
+                    }
+                </div>
+            </div>
         }
         else
         {
@@ -75,13 +105,13 @@
                     {
                         <tr>
                             <td style="width:20px">
-                                <input type="checkbox" id="check1"/>
+                                <input type="checkbox" />
                             </td>
                             <td>
-                                <label for="check1">@item.ITEM_ID</label>
+                                <label>@item.ITEM_ID</label>
                             </td>
                             <td>
-                                <label for="check1">@item.ITEM</label>
+                                <label>@item.ITEM</label>
                             </td>
                         </tr>
                     }
@@ -89,6 +119,7 @@
             </table>
         }
     </div>
+    <br />
     <div class="row">
         <div class="col-6">
             <a class="btn btn-outline-info" href="NewToDoList">Back to Lists</a>

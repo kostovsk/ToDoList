@@ -1,0 +1,39 @@
+﻿@page
+@model ToDoListApp.Pages.ListModels.AddItemModel
+@{
+    ViewData["Title"] = "AddItem";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+
+    string testQueryStringID = null;
+    if (Request.Query.ContainsKey("Id"))
+    {
+        testQueryStringID = Request.Query["Id"].ToString();
+    }
+    else
+    {
+        testQueryStringID = "missing Id";
+
+    }
+
+    int listId = Int32.Parse(testQueryStringID);
+}
+
+
+
+<form method="post">
+    <div class="form-group">
+        <label for="Items.ITEM">Item</label>
+        <input type="text" class="form-control" asp-for="Items.ITEM">
+        <input type="hidden" asp-for="Items.LIST_ID" value="@listId" />
+        <span asp-validation-for="Items.ITEM"></span>
+    </div>
+
+    <div class="btn-group">
+        <button type="submit" class="btn btn-outline-primary" asp-page-handler="submit">Add Item</button>
+    </div>
+</form>
+
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

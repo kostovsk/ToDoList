@@ -9,15 +9,14 @@ using ToDoListApp.Models;
 
 namespace ToDoListApp.Pages.ListModels
 {
-   public class CreateModel : PageModel
+   public class AddItemModel : PageModel
    {
       private readonly ApplicationDbContext _db;
 
       [BindProperty]
-      public ToDoList ToDoList { get; set; }
       public Items Items { get; set; }
 
-      public CreateModel(ApplicationDbContext db)
+      public AddItemModel(ApplicationDbContext db)
       {
          _db = db;
       }
@@ -34,13 +33,10 @@ namespace ToDoListApp.Pages.ListModels
             return Page();
          }
 
-         ToDoList.DATE_CREATED = DateTime.Now;
-
-         _db.ToDoList.Add(ToDoList);
+         _db.Items.Add(Items);
          await _db.SaveChangesAsync();
 
-         return RedirectToPage("AddItem");
+         return RedirectToPage("View");
       }
-
    }
 }
