@@ -22,25 +22,40 @@ namespace ToDoListApp.Pages.ListModels
 
       public IList<Items> ArrayItems { get; set; }
 
+      public IList<Items> ToDoListItems { get; set; }
 
-      public async Task<IActionResult> OnGet()
+      public async Task<IActionResult> OnGet(int? id)
       {
+         ArrayToDoList = await _db.ToDoList.ToListAsync();
+         ArrayItems = await _db.Items.ToListAsync();
+         ToDoListItems = new List<Items>();
 
          //gets the id from the Query String: https://localhost:44306/ListModels/Edit?Id=1
 
-         string idFromQueryString = Request.Query["Id"];
          /*
           TODO: 
             check for null, if null then redirect back to Index page with the ItemsList, 
             else convert 'idFromQueryString' to int and use the _db to find the item
           */
-         if (String.IsNullOrEmpty(idFromQueryString))
+         if (id == null)
          {
-            return RedirectToPage("Index");
-         }
+            string idFromQueryString = Request.Query["Id"];
 
-         ArrayToDoList = await _db.ToDoList.ToListAsync(); 
-         ArrayItems = await _db.Items.ToListAsync();
+            if (String.IsNullOrEmpty(idFromQueryString))
+            {
+               return RedirectToPage("NewToDoList");
+            }
+         }
+         else
+         {
+            foreach (var item in ArrayItems)
+            {
+               if (item.LIST_ID == id)
+               {
+                  ToDoListItems.Add(item);
+               }
+            }
+         }
          
          return Page();
       }

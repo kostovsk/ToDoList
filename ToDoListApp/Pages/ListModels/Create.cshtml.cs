@@ -41,7 +41,7 @@ namespace ToDoListApp.Pages.ListModels
 
          var listId = ToDoList.LIST_ID;
 
-         return Page();
+         return RedirectToPage("Edit", new { id = listId });
       }
 
    }

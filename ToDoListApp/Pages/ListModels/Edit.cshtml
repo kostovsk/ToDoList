@@ -1,25 +1,25 @@
 ﻿@page
 @model ToDoListApp.Pages.ListModels.EditModel
 @{
-   string testQueryStringID = null;
-   if (Request.Query.ContainsKey("Id"))
-   {
-       testQueryStringID = Request.Query["Id"].ToString();
-   }
-   else
-   {
-       testQueryStringID = "missing Id";
+    string testQueryStringID = null;
+    if (Request.Query.ContainsKey("Id"))
+    {
+        testQueryStringID = Request.Query["Id"].ToString();
+    }
+    else
+    {
+        testQueryStringID = "missing Id";
 
-   }
+    }
 
-   Boolean itemInArrayItems = true;
-   foreach (var item in Model.ArrayItems)
-   {
-       if (item.LIST_ID == Int32.Parse(testQueryStringID))
-       {
-           itemInArrayItems = false;
-       }
-   }
+    Boolean itemInArrayItems = true;
+    foreach (var item in Model.ArrayItems)
+    {
+        if (item.LIST_ID == Int32.Parse(testQueryStringID))
+        {
+            itemInArrayItems = false;
+        }
+    }
 }
 
 
@@ -99,22 +99,19 @@
                         <label>Item</label>
                     </th>
                 </tr>
-                @foreach (var item in Model.ArrayItems)
+                @foreach (var item in Model.ToDoListItems)
                 {
-                    if (item.LIST_ID == Int32.Parse(testQueryStringID))
-                    {
-                        <tr>
-                            <td style="width:20px">
-                                <input type="checkbox" />
-                            </td>
-                            <td>
-                                <label>@item.ITEM_ID</label>
-                            </td>
-                            <td>
-                                <label>@item.ITEM</label>
-                            </td>
-                        </tr>
-                    }
+                    <tr>
+                        <td style="width:20px">
+                            <input type="checkbox" />
+                        </td>
+                        <td>
+                            <label>@item.ITEM_ID</label>
+                        </td>
+                        <td>
+                            <label>@item.ITEM</label>
+                        </td>
+                    </tr>
                 }
             </table>
             <br />
@@ -131,8 +128,8 @@
             </div>
         }
     </div>
-    
-    <br/>
+
+    <br />
     <div class="row">
         <div class="col-6">
             <a class="btn btn-outline-info" href="NewToDoList">Back to Lists</a>
