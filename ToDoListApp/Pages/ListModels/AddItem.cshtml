@@ -1,9 +1,6 @@
 ﻿@page
 @model ToDoListApp.Pages.ListModels.AddItemModel
 @{
-    ViewData["Title"] = "AddItem";
-    Layout = "~/Pages/Shared/_Layout.cshtml";
-
     string testQueryStringID = null;
     if (Request.Query.ContainsKey("Id"))
     {
@@ -14,8 +11,6 @@
         testQueryStringID = "missing Id";
 
     }
-
-    int listId = Int32.Parse(testQueryStringID);
 }
 
 
@@ -24,12 +19,17 @@
     <div class="form-group">
         <label for="Items.ITEM">Item</label>
         <input type="text" class="form-control" asp-for="Items.ITEM">
-        <input type="hidden" asp-for="Items.LIST_ID" value="@listId" />
+        <input type="hidden" asp-for="Items.LIST_ID" value="@testQueryStringID" />
         <span asp-validation-for="Items.ITEM"></span>
     </div>
 
     <div class="btn-group">
-        <button type="submit" class="btn btn-outline-primary" asp-page-handler="submit">Add Item</button>
+        <div>
+            <button type="submit" class="btn btn-outline-primary" asp-page-handler="submit">Add item</button>
+        </div>
+        <div>
+            <a class="btn btn-outline-info" href="Edit?Id=@testQueryStringID">Back</a>
+        </div>
     </div>
 </form>
 

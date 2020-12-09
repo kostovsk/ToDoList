@@ -36,7 +36,7 @@ namespace ToDoListApp.Pages.ListModels
          _db.Items.Add(Items);
          await _db.SaveChangesAsync();
 
-         return RedirectToPage("View");
+         return Page();
       }
    }
 }
