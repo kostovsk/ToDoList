@@ -18,18 +18,13 @@ namespace ToDoListApp.Pages.ListModels
       {
          _db = db;
       }
-      public IList<ToDoList> ArrayToDoList { get; set; }
 
+      public IList<ToDoList> ArrayToDoList { get; set; }
       public IList<Items> ArrayItems { get; set; }
 
-      public IList<Items> ToDoListItems { get; set; }
 
       public async Task<IActionResult> OnGet(int? id)
       {
-         ArrayToDoList = await _db.ToDoList.ToListAsync();
-         ArrayItems = await _db.Items.ToListAsync();
-         ToDoListItems = new List<Items>();
-
          //gets the id from the Query String: https://localhost:44306/ListModels/Edit?Id=1
 
          /*
@@ -46,17 +41,10 @@ namespace ToDoListApp.Pages.ListModels
                return RedirectToPage("NewToDoList");
             }
          }
-         else
-         {
-            foreach (var item in ArrayItems)
-            {
-               if (item.LIST_ID == id)
-               {
-                  ToDoListItems.Add(item);
-               }
-            }
-         }
-         
+
+         ArrayToDoList = await _db.ToDoList.ToListAsync();
+         ArrayItems = await _db.Items.ToListAsync();
+
          return Page();
       }
    }

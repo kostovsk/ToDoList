@@ -75,13 +75,7 @@
             <br />
             <div class="row">
                 <div class="col-6">
-                    @foreach (var item in Model.ArrayToDoList)
-                    {
-                        if (item.LIST_ID == Int32.Parse(testQueryStringID))
-                        {
-                            <a href="AddItem?Id=@item.LIST_ID.ToString()" class="btn btn-outline-success">Add item</a>
-                        }
-                    }
+                    <a href="AddItem?Id=@testQueryStringID" class="btn btn-outline-success">Add item</a>
                 </div>
             </div>
         }
@@ -99,31 +93,28 @@
                         <label>Item</label>
                     </th>
                 </tr>
-                @foreach (var item in Model.ToDoListItems)
+                @foreach (var item in Model.ArrayItems)
                 {
-                    <tr>
-                        <td style="width:20px">
-                            <input type="checkbox" />
-                        </td>
-                        <td>
-                            <label>@item.ITEM_ID</label>
-                        </td>
-                        <td>
-                            <label>@item.ITEM</label>
-                        </td>
-                    </tr>
+                    if (item.LIST_ID == Int32.Parse(testQueryStringID))
+                    {
+                        <tr>
+                            <td style="width:20px">
+                                <input type="checkbox" />
+                            </td>
+                            <td>
+                                <label>@item.ITEM_ID</label>
+                            </td>
+                            <td>
+                                <label>@item.ITEM</label>
+                            </td>
+                        </tr>
+                    }
                 }
             </table>
             <br />
             <div class="row">
                 <div class="col-6">
-                    @foreach (var item in Model.ArrayToDoList)
-                    {
-                        if (item.LIST_ID == Int32.Parse(testQueryStringID))
-                        {
-                            <a href="AddItem?Id=@item.LIST_ID.ToString()" class="btn btn-outline-success">Add item</a>
-                        }
-                    }
+                    <a href="AddItem?Id=@testQueryStringID" class="btn btn-outline-success">Add item</a>
                 </div>
             </div>
         }
