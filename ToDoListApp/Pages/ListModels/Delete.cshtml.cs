@@ -36,6 +36,14 @@ namespace ToDoListApp.Pages.ListModels
             }
          }
 
+         foreach (var item in _db.Items)
+         {
+            if (item.LIST_ID == listId)
+            {
+               _db.Items.Remove(item);
+            }
+         }
+
          //_db.ToDoList.Remove(new ToDoList() { LIST_ID = listId });
          await _db.SaveChangesAsync();
 
