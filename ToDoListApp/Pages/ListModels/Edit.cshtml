@@ -73,11 +73,16 @@
                 </div>
             </div>
             <br />
-            <div class="row">
-                <div class="col-6">
-                    <a href="AddItem?Id=@testQueryStringID" class="btn btn-outline-success">Add item</a>
+            <form method="post">
+                <div class="form-group">
+                    <input type="text" class="form-control" asp-for="Items.ITEM" />
+                    <input type="hidden" asp-for="Items.LIST_ID" value="@testQueryStringID" />
+                    <span asp-validation-for="Items.ITEM"></span>
                 </div>
-            </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-outline-primary" asp-page-handler="submit">Add Item</button>
+                </div>
+            </form>
         }
         else
         {
@@ -112,11 +117,17 @@
                 }
             </table>
             <br />
-            <div class="row">
-                <div class="col-6">
-                    <a href="AddItem?Id=@testQueryStringID" class="btn btn-outline-success">Add item</a>
+            <form method="post">
+                <div class="form-group">
+                    <label for="Items.ITEM" class="text-dark">New Item: </label>
+                    <input type="text" class="form-control" asp-for="Items.ITEM" />
+                    <input type="hidden" asp-for="Items.LIST_ID" value="@testQueryStringID" />
+                    <span asp-validation-for="Items.ITEM"></span>
                 </div>
-            </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-outline-primary" asp-page-handler="submit">Add Item</button>
+                </div>
+            </form>
         }
     </div>
 

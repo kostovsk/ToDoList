@@ -21,7 +21,8 @@ namespace ToDoListApp.Pages.ListModels
 
       public IList<ToDoList> ArrayToDoList { get; set; }
       public IList<Items> ArrayItems { get; set; }
-
+      [BindProperty]
+      public Items Items { get; set; }
 
       public async Task<IActionResult> OnGet(int? id)
       {
@@ -46,6 +47,21 @@ namespace ToDoListApp.Pages.ListModels
          ArrayItems = await _db.Items.ToListAsync();
 
          return Page();
+      }
+
+      public async Task<IActionResult> OnPostAsync()
+      {
+         if (!ModelState.IsValid)
+         {
+            return Page();
+         }
+
+         _db.Items.Add(Items);
+         await _db.SaveChangesAsync();
+
+         var listId = Items.LIST_ID;
+
+         return RedirectToPage("Edit", new { id = listId });
       }
    }
 }
