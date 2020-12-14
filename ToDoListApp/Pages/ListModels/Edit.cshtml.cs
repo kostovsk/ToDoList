@@ -23,6 +23,8 @@ namespace ToDoListApp.Pages.ListModels
       public IList<Items> ArrayItems { get; set; }
       [BindProperty]
       public Items Items { get; set; }
+      [BindProperty]
+      public List<int> AreChecked { get; set; }
 
       public async Task<IActionResult> OnGet(int? id)
       {
@@ -61,6 +63,26 @@ namespace ToDoListApp.Pages.ListModels
 
          var listId = Items.LIST_ID;
 
+         return RedirectToPage("Edit", new { id = listId });
+      }
+
+      public async Task<IActionResult> OnPostRemove()
+      {
+         int listId = -1;
+
+         for(int i = 0; i < AreChecked.Count; i++)
+         {
+            foreach (var item in _db.Items)
+            {
+               if(item.ITEM_ID == AreChecked[i])
+               {
+                  listId = item.LIST_ID;
+                  _db.Items.Remove(item);
+               }
+            }
+         }
+
+         await _db.SaveChangesAsync();
          return RedirectToPage("Edit", new { id = listId });
       }
    }
