@@ -25,6 +25,7 @@ namespace ToDoListApp.Pages.ListModels
       public Items Items { get; set; }
       [BindProperty]
       public List<int> AreChecked { get; set; }
+      public IList<Items> MyItems { get; set; }
 
       public async Task<IActionResult> OnGet(int? id)
       {
@@ -35,6 +36,7 @@ namespace ToDoListApp.Pages.ListModels
             check for null, if null then redirect back to Index page with the ItemsList, 
             else convert 'idFromQueryString' to int and use the _db to find the item
           */
+
          if (id == null)
          {
             string idFromQueryString = Request.Query["Id"];
@@ -45,8 +47,19 @@ namespace ToDoListApp.Pages.ListModels
             }
          }
 
+         //MyItems = _db.Items
+         //   .Include(n => n.ITEM)
+         //   .AsNoTracking()
+         //   .ToList();
+         /*
+          * TO DO: substitute 2011 with the list id, create an int list id with
+          * int parse from idFromQueryString
+          * in html, use lambda expression and remove foreach loops
+          */
          ArrayToDoList = await _db.ToDoList.ToListAsync();
-         ArrayItems = await _db.Items.ToListAsync();
+         ArrayItems = await _db.Items
+            .Where(n => n.LIST_ID == 2011)
+            .ToListAsync();
 
          return Page();
       }
