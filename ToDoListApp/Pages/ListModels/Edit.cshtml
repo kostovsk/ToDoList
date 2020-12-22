@@ -13,12 +13,9 @@
     }
 
     Boolean itemInArrayItems = true;
-    foreach (var item in Model.ArrayItems)
+    if (Model.ArrayItems.Count > 0)
     {
-        if (item.LIST_ID == Int32.Parse(testQueryStringID))
-        {
-            itemInArrayItems = false;
-        }
+        itemInArrayItems = false;
     }
 }
 
@@ -95,20 +92,17 @@
                     </tr>
                     @foreach (var item in Model.ArrayItems)
                     {
-                        if (item.LIST_ID == Int32.Parse(testQueryStringID))
-                        {
-                            <tr>
-                                <td style="width:20px">
-                                    <input name="AreChecked" type="checkbox" id="@item.ITEM_ID" value="@item.ITEM_ID" />
-                                </td>
-                                <td>
-                                    <label>@item.ITEM_ID</label>
-                                </td>
-                                <td>
-                                    <label>@item.ITEM</label>
-                                </td>
-                            </tr>
-                        }
+                        <tr>
+                            <td style="width:20px">
+                                <input name="AreChecked" type="checkbox" id="@item.ITEM_ID" value="@item.ITEM_ID" />
+                            </td>
+                            <td>
+                                <label>@item.ITEM_ID</label>
+                            </td>
+                            <td>
+                                <label>@item.ITEM</label>
+                            </td>
+                        </tr>
                     }
                 </table>
                 <button type="submit" class="btn btn-outline-success" asp-page-handler="remove">Remove</button>
