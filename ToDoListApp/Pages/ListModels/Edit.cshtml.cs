@@ -51,6 +51,11 @@ namespace ToDoListApp.Pages.ListModels
 
          test = _db.ToDoList
             .Single(x => x.LIST_ID == id);
+
+         if(test == null)
+         {
+            return RedirectToPage("NewToDoList");
+         }
          
          ArrayToDoList = await _db.ToDoList.ToListAsync();
          ArrayItems = await _db.Items
