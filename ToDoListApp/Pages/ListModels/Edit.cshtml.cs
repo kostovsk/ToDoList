@@ -27,6 +27,8 @@ namespace ToDoListApp.Pages.ListModels
       public List<int> AreChecked { get; set; }
       public IList<Items> MyItems { get; set; }
 
+      public ToDoList test { get; set; }
+
       public async Task<IActionResult> OnGet(int? id)
       {
          //gets the id from the Query String: https://localhost:44306/ListModels/Edit?Id=1
@@ -47,18 +49,12 @@ namespace ToDoListApp.Pages.ListModels
             }
          }
 
-         //MyItems = _db.Items
-         //   .Include(n => n.ITEM)
-         //   .AsNoTracking()
-         //   .ToList();
-         /*
-          * TO DO: substitute 2011 with the list id, create an int list id with
-          * int parse from idFromQueryString
-          * in html, use lambda expression and remove foreach loops
-          */
+         test = _db.ToDoList
+            .Single(x => x.LIST_ID == id);
+         
          ArrayToDoList = await _db.ToDoList.ToListAsync();
          ArrayItems = await _db.Items
-            .Where(n => n.LIST_ID == 2011)
+            .Where(n => n.LIST_ID == id)
             .ToListAsync();
 
          return Page();
