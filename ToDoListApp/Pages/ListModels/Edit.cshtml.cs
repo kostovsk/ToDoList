@@ -19,15 +19,13 @@ namespace ToDoListApp.Pages.ListModels
          _db = db;
       }
 
-      public IList<ToDoList> ArrayToDoList { get; set; }
+      public ToDoList ToDoList { get; set; }
       public IList<Items> ArrayItems { get; set; }
       [BindProperty]
       public Items Items { get; set; }
       [BindProperty]
       public List<int> AreChecked { get; set; }
-      public IList<Items> MyItems { get; set; }
 
-      public ToDoList test { get; set; }
 
       public async Task<IActionResult> OnGet(int? id)
       {
@@ -49,15 +47,14 @@ namespace ToDoListApp.Pages.ListModels
             }
          }
 
-         test = _db.ToDoList
+         ToDoList = _db.ToDoList
             .Single(x => x.LIST_ID == id);
 
-         if(test == null)
+         if(ToDoList == null)
          {
             return RedirectToPage("NewToDoList");
          }
          
-         ArrayToDoList = await _db.ToDoList.ToListAsync();
          ArrayItems = await _db.Items
             .Where(n => n.LIST_ID == id)
             .ToListAsync();

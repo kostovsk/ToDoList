@@ -54,13 +54,7 @@
 <div class="border backgroundwhite">
     <div class="row">
         <div class="col-6">
-            @foreach (var item in Model.ArrayToDoList)
-            {
-                if (item.LIST_ID == Int32.Parse(testQueryStringID))
-                {
-                    <h2 class="text-dark">@item.NAME</h2>
-                }
-            }
+            <h2 class="text-dark">@Model.ToDoList.NAME</h2>
         </div>
     </div>
     <br />
