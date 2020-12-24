@@ -64,15 +64,15 @@ namespace ToDoListApp.Pages.ListModels
 
       public async Task<IActionResult> OnPostAsync()
       {
+         var listId = Items.LIST_ID;
+
          if (!ModelState.IsValid)
          {
-            return Page();
+            return RedirectToPage("Edit", new { id = listId });
          }
 
          _db.Items.Add(Items);
          await _db.SaveChangesAsync();
-
-         var listId = Items.LIST_ID;
 
          return RedirectToPage("Edit", new { id = listId });
       }

@@ -11,6 +11,7 @@ namespace ToDoListApp.Models
       [Key]
       public int ITEM_ID { get; set; }
       public int LIST_ID { get; set; }
+      //[RegularExpression(@"[^\s]+")]
       [Required]
       public string ITEM { get; set; }
    }
