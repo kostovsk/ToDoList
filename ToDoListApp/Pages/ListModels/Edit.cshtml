@@ -36,9 +36,8 @@
 <head>
     <script language="javascript" type="text/javascript">
         function validateInput() {
-            //var x = document.forms["myForm"]["myInput"].value;
-            var x = document.getElementById("<%=itemtxt:ClientID %>");
-            if (x == null || x == "" || x == " ") {
+            var x = document.forms["myForm"]["fitem"].value;
+            if (x == "") {
                 alert("Javascript message")
                 return false;
             }
@@ -109,10 +108,10 @@
                 </form>
             }
             <br />
-            <form method="post">
+            <form method="post" name="myForm" onsubmit="return validateInput()">
                 <div class="form-group">
                     <label for="Items.ITEM" class="text-dark">New Item: </label>
-                    <input type="text" ID="itemtxt" class="form-control" asp-for="Items.ITEM" />
+                    <input type="text" name="fitem" class="form-control" asp-for="Items.ITEM" />
                     <input type="hidden" asp-for="Items.LIST_ID" value="@testQueryStringID" />
                     <!--<span asp-validation-for="Items.ITEM"></span>-->
                 </div>
