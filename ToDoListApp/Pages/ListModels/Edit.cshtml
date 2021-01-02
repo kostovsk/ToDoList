@@ -33,80 +33,80 @@
     }
 </style>
 
+<head>
+    <script type="text/javascript">
+        function validateInput() {
+            var x = document.forms["inputItem"]["iname"].value;
+            if (x == null || x == "" || x == " ") {
+                alert("Javascript message")
+                return false;
+            }
+        }
+    </script>
+</head>
 
 
-
-
-<div class="container">
-    <div class="sample-box ">
-        The Id from the Query String is :
-        <h3>
-            @testQueryStringID
-        </h3>
-    </div>
-</div>
-
-<br />
-<br />
-<div class="border backgroundwhite">
-    <div class="row">
-        <div class="col-6">
-            <h2 class="text-dark">@Model.ToDoList.NAME</h2>
+<body>
+    <div class="container">
+        <div class="sample-box ">
+            The Id from the Query String is :
+            <h3>
+                @testQueryStringID
+            </h3>
         </div>
     </div>
+
     <br />
-    <div>
-        @if (itemInArrayItems)
-        {
-            <div class="border-info">
-                <div class="col-6">
-                    <h5 class="text">No items exist. Please add new items.</h5>
-                </div>
+    <br />
+    <div class="border backgroundwhite">
+        <div class="row">
+            <div class="col-6">
+                <h2 class="text-dark">@Model.ToDoList.NAME</h2>
             </div>
-            <br />
-            <form method="post">
-                <div class="form-group">
-                    <input type="text" class="form-control" asp-for="Items.ITEM" />
-                    <input type="hidden" asp-for="Items.LIST_ID" value="@testQueryStringID" />
-                    <span asp-validation-for="Items.ITEM"></span>
+        </div>
+        <br />
+        <div>
+            @if (itemInArrayItems)
+            {
+                <div class="border-info">
+                    <div class="col-6">
+                        <h5 class="text">No items exist. Please add new items.</h5>
+                    </div>
                 </div>
-                <div class="btn-group">
-                    <button type="submit" class="btn btn-outline-primary" asp-page-handler="submit">Add Item</button>
-                </div>
-            </form>
-        }
-        else
-        {
-            <form method="post">
-                <table class="table table-striped border">
-                    <tr class="table-secondary">
-                        <th style="width:20px">
-                            <label>Select</label>
-                        </th>
-                        <th>
-                            <label>Id</label>
-                        </th>
-                        <th>
-                            <label>Item</label>
-                        </th>
-                    </tr>
-                    @foreach (var item in Model.ArrayItems)
-                    {
-                        <tr>
-                            <td style="width:20px">
-                                <input name="AreChecked" type="checkbox" id="@item.ITEM_ID" value="@item.ITEM_ID" />
-                            </td>
-                            <td>
-                                <label>@item.ITEM_ID</label>
-                            </td>
-                            <td>
-                                <label>@item.ITEM</label>
-                            </td>
+            }
+            else
+            {
+                <form method="post">
+                    <table class="table table-striped border">
+                        <tr class="table-secondary">
+                            <th style="width:20px">
+                                <label>Select</label>
+                            </th>
+                            <th>
+                                <label>Id</label>
+                            </th>
+                            <th>
+                                <label>Item</label>
+                            </th>
                         </tr>
-                    }
-                </table>
-                <button type="submit" class="btn btn-outline-success" asp-page-handler="remove">Remove</button>
-            </form>
+                        @foreach (var item in Model.ArrayItems)
+                        {
+                            <tr>
+                                <td style="width:20px">
+                                    <input name="AreChecked" type="checkbox" id="@item.ITEM_ID" value="@item.ITEM_ID" />
+                                </td>
+                                <td>
+                                    <label>@item.ITEM_ID</label>
+                                </td>
+                                <td>
+                                    <label>@item.ITEM</label>
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                    <button type="submit" class="btn btn-outline-success" asp-page-handler="remove">Remove</button>
+                </form>
+            }
             <br />
             <form method="post">
                 <div class="form-group">
@@ -119,17 +119,29 @@
                     <button type="submit" class="btn btn-outline-primary" asp-page-handler="submit">Add Item</button>
                 </div>
             </form>
-        }
-    </div>
-
-    <br />
-    <div class="row">
-        <div class="col-6">
-            <a class="btn btn-outline-info" href="NewToDoList">Back to Lists</a>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-6">
+                <a class="btn btn-outline-info" href="NewToDoList">Back to Lists</a>
+            </div>
         </div>
     </div>
-</div>
+</body>
 
+<!--
+<br />
+<form method="post" name="inputItem">
+    <div class="form-group">
+        <input type="text" name="iname" class="form-control" asp-for="Items.ITEM" />
+        <input type="hidden" asp-for="Items.LIST_ID" value="@testQueryStringID" />
+        <span asp-validation-for="Items.ITEM"></span>
+    </div>
+    <div class="btn-group">
+        <button type="submit" class="btn btn-outline-primary" asp-page-handler="submit">Add Item</button>
+    </div>
+</form>
+-->
 
 @section Scripts{
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
