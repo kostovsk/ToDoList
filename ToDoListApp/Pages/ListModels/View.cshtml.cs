@@ -19,20 +19,32 @@ namespace ToDoListApp.Pages.ListModels
          _db = db;
       }
 
-      public IList<ToDoList> ArrayToDoList { get; set; }
+      public ToDoList ToDoList { get; set; }
       public IList<Items> ArrayItems { get; set; }
 
-      public async Task<IActionResult> OnGet()
+      public async Task<IActionResult> OnGet(int? id)
       {
-         string idFromQueryString = Request.Query["Id"];
-
-         if (String.IsNullOrEmpty(idFromQueryString))
+         if (id == null)
          {
-            return RedirectToPage("Index");
+            string idFromQueryString = Request.Query["Id"];
+
+            if (String.IsNullOrEmpty(idFromQueryString))
+            {
+               return RedirectToPage("NewToDoList");
+            }
          }
 
-         ArrayToDoList = await _db.ToDoList.ToListAsync();
-         ArrayItems = await _db.Items.ToArrayAsync();
+         ToDoList = _db.ToDoList
+            .Single(x => x.LIST_ID == id);
+
+         if (ToDoList == null)
+         {
+            return RedirectToPage("NewToDoList");
+         }
+
+         ArrayItems = await _db.Items
+            .Where(n => n.LIST_ID == id)
+            .ToListAsync();
 
          return Page();
       }

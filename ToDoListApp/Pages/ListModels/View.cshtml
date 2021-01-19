@@ -1,25 +1,25 @@
 ﻿@page
 @model ToDoListApp.Pages.ListModels.ViewModel
 @{
-   string testQueryStringID = null;
-   if (Request.Query.ContainsKey("Id"))
-   {
-       testQueryStringID = Request.Query["Id"].ToString();
-   }
-   else
-   {
-       testQueryStringID = "missing Id";
+    string testQueryStringID = null;
+    if (Request.Query.ContainsKey("Id"))
+    {
+        testQueryStringID = Request.Query["Id"].ToString();
+    }
+    else
+    {
+        testQueryStringID = "missing Id";
 
-   }
+    }
 
-   Boolean itemInArrayItems = true;
-   foreach (var item in Model.ArrayItems)
-   {
-       if (item.LIST_ID == Int32.Parse(testQueryStringID))
-       {
-           itemInArrayItems = false;
-       }
-   }
+    Boolean itemInArrayItems = true;
+    foreach (var item in Model.ArrayItems)
+    {
+        if (item.LIST_ID == Int32.Parse(testQueryStringID))
+        {
+            itemInArrayItems = false;
+        }
+    }
 }
 
 <br />
@@ -27,13 +27,7 @@
 <div class="border backgroundwhite">
     <div class="row">
         <div class="col-6">
-            @foreach (var item in Model.ArrayToDoList)
-            {
-                if (item.LIST_ID == Int32.Parse(testQueryStringID))
-                {
-                    <h2 class="text-dark">@item.NAME</h2>
-                }
-            }
+            <h2 class="text-dark">@Model.ToDoList.NAME</h2>
         </div>
     </div>
     <br />
@@ -48,24 +42,22 @@
             <br />
             <div class="row">
                 <div class="col-6">
-                    <a href="" class="btn btn-outline-success">Add item</a>
+                    <a href="Edit?Id=@Model.ToDoList.LIST_ID.ToString()" class="btn btn-outline-success">Add item</a>
                 </div>
             </div>
         }
         else
         {
-        <table class="table table-striped border">
-            <tr class="table-secondary">
-                <th>
-                    <label>Id</label>
-                </th>
-                <th>
-                    <label>Item</label>
-                </th>
-            </tr>
-            @foreach (var item in Model.ArrayItems)
-            {
-                if (item.LIST_ID == Int32.Parse(testQueryStringID))
+            <table class="table table-striped border">
+                <tr class="table-secondary">
+                    <th>
+                        <label>Id</label>
+                    </th>
+                    <th>
+                        <label>Item</label>
+                    </th>
+                </tr>
+                @foreach (var item in Model.ArrayItems)
                 {
                     <tr>
                         <td>
@@ -76,11 +68,10 @@
                         </td>
                     </tr>
                 }
-            }
-        </table>
+            </table>
         }
     </div>
-    <br/>
+    <br />
     <div class="row">
         <div class="col-6">
             <a class="btn btn-outline-info" href="NewToDoList">Back to Lists</a>

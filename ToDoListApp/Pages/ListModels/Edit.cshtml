@@ -33,116 +33,94 @@
     }
 </style>
 
-<head>
-    <script language="javascript" type="text/javascript">
-        function validateInput() {
-            var x = document.forms["myForm"]["fitem"].value;
-            if (x.trim() == "") {
-                document.getElementById("test").innerHTML = "You have entered invalid input. Please try again.";
-                //alert("You have entered invalid input. Please try again.")
-                return false;
-            }
-        }
-    </script>
-</head>
 
+<div class="container">
+    <div class="sample-box ">
+        The Id from the Query String is :
+        <h3>
+            @testQueryStringID
+        </h3>
+    </div>
+</div>
 
-<body>
-    <div class="container">
-        <div class="sample-box ">
-            The Id from the Query String is :
-            <h3>
-                @testQueryStringID
-            </h3>
+<br />
+<br />
+<div class="border backgroundwhite">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-dark">@Model.ToDoList.NAME</h2>
         </div>
     </div>
-
     <br />
-    <br />
-    <div class="border backgroundwhite">
-        <div class="row">
-            <div class="col-6">
-                <h2 class="text-dark">@Model.ToDoList.NAME</h2>
+    <div>
+        @if (itemInArrayItems)
+        {
+            <div class="border-info">
+                <div class="col-6">
+                    <h5 class="text">No items exist. Please add new items.</h5>
+                </div>
             </div>
-        </div>
-        <br />
-        <div>
-            @if (itemInArrayItems)
-            {
-                <div class="border-info">
-                    <div class="col-6">
-                        <h5 class="text">No items exist. Please add new items.</h5>
-                    </div>
-                </div>
-            }
-            else
-            {
-                <form method="post">
-                    <table class="table table-striped border">
-                        <tr class="table-secondary">
-                            <th style="width:20px">
-                                <label>Select</label>
-                            </th>
-                            <th>
-                                <label>Id</label>
-                            </th>
-                            <th>
-                                <label>Item</label>
-                            </th>
+        }
+        else
+        {
+            <form method="post">
+                <table class="table table-striped border">
+                    <tr class="table-secondary">
+                        <th style="width:20px">
+                            <label>Select</label>
+                        </th>
+                        <th>
+                            <label>Id</label>
+                        </th>
+                        <th>
+                            <label>Item</label>
+                        </th>
+                    </tr>
+                    @foreach (var item in Model.ArrayItems)
+                    {
+                        <tr>
+                            <td style="width:20px">
+                                <input name="AreChecked" type="checkbox" id="@item.ITEM_ID" value="@item.ITEM_ID" />
+                            </td>
+                            <td>
+                                <label>@item.ITEM_ID</label>
+                            </td>
+                            <td>
+                                <label>@item.ITEM</label>
+                            </td>
                         </tr>
-                        @foreach (var item in Model.ArrayItems)
-                        {
-                            <tr>
-                                <td style="width:20px">
-                                    <input name="AreChecked" type="checkbox" id="@item.ITEM_ID" value="@item.ITEM_ID" />
-                                </td>
-                                <td>
-                                    <label>@item.ITEM_ID</label>
-                                </td>
-                                <td>
-                                    <label>@item.ITEM</label>
-                                </td>
-                            </tr>
-                        }
-                    </table>
-                    <button type="submit" class="btn btn-outline-success" asp-page-handler="remove">Remove</button>
-                </form>
-            }
-            <br />
-            <form method="post" name="myForm" onsubmit="return validateInput()">
-                <div class="form-group">
-                    <label for="Items.ITEM" class="text-dark">New Item: </label>
-                    <input type="text" name="fitem" class="form-control" asp-for="Items.ITEM" />
-                    <input type="hidden" asp-for="Items.LIST_ID" value="@testQueryStringID" />
-                    <span id="test"></span>
-                </div>
-                <div class="btn-group">
-                    <button type="submit" class="btn btn-outline-primary" asp-page-handler="submit">Add Item</button>
-                </div>
+                    }
+                </table>
+                <button type="submit" class="btn btn-outline-success" asp-page-handler="remove">Remove</button>
             </form>
-        </div>
+        }
         <br />
-        <div class="row">
-            <div class="col-6">
+        <form method="post" name="myForm" onsubmit="return validateInput()">
+            <div class="form-group col-6">
+                <label for="Items.ITEM" class="text-dark">New Item: </label>
+                <input type="text" name="fitem" class="form-control" asp-for="Items.ITEM" />
+                <input type="hidden" asp-for="Items.LIST_ID" value="@testQueryStringID" />
+                <span class="text-danger" id="test"></span>
+            </div>
+            <div class="btn-group">
+                <button type="submit" class="btn btn-outline-primary" asp-page-handler="submit">Add Item</button>
                 <a class="btn btn-outline-info" href="NewToDoList">Back to Lists</a>
             </div>
-        </div>
+        </form>
     </div>
-</body>
+</div>
 
-<!--
-<br />
-<form method="post" name="inputItem">
-    <div class="form-group">
-        <input type="text" name="iname" class="form-control" asp-for="Items.ITEM" />
-        <input type="hidden" asp-for="Items.LIST_ID" value="@testQueryStringID" />
-        <span asp-validation-for="Items.ITEM"></span>
-    </div>
-    <div class="btn-group">
-        <button type="submit" class="btn btn-outline-primary" asp-page-handler="submit">Add Item</button>
-    </div>
-</form>
--->
+
+<script language="javascript" type="text/javascript">
+    function validateInput() {
+        var x = document.forms["myForm"]["fitem"].value;
+        if (x.trim() == "") {
+            document.getElementById("test").innerHTML = "* You have entered invalid input! Please try again!";
+            return false;
+        }
+    }
+</script>
+
 
 @section Scripts{
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
