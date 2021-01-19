@@ -38,7 +38,8 @@
         function validateInput() {
             var x = document.forms["myForm"]["fitem"].value;
             if (x.trim() == "") {
-                alert("You have entered invalid input. Please try again.")
+                document.getElementById("test").innerHTML = "You have entered invalid input. Please try again.";
+                //alert("You have entered invalid input. Please try again.")
                 return false;
             }
         }
@@ -113,7 +114,7 @@
                     <label for="Items.ITEM" class="text-dark">New Item: </label>
                     <input type="text" name="fitem" class="form-control" asp-for="Items.ITEM" />
                     <input type="hidden" asp-for="Items.LIST_ID" value="@testQueryStringID" />
-                    <!--<span asp-validation-for="Items.ITEM"></span>-->
+                    <span id="test"></span>
                 </div>
                 <div class="btn-group">
                     <button type="submit" class="btn btn-outline-primary" asp-page-handler="submit">Add Item</button>
