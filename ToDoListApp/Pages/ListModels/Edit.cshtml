@@ -60,9 +60,9 @@
                     <h5 class="text">No items exist. Please add new items.</h5>
                 </div>
             </div>
-            <form name="myForm" onsubmit="return validateInput()" method="post">
+            <form onsubmit="return validateInput()" method="post">
                 <div class="form-group col-6">
-                    <input type="text" name="fitem" class="form-control" asp-for="Items.ITEM" />
+                    <input type="text" id="fname" class="form-control" asp-for="Items.ITEM" />
                     <input type="hidden" asp-for="Items.LIST_ID" value="@testQueryStringID" />
                     <span class="text-danger" id="test"></span>
                 </div>
@@ -150,10 +150,10 @@
 
 <script language="javascript" type="text/javascript">
     function validateInput() {
-        var x = document.forms["myForm"]["fitem"].value;
+        var x = document.getElementById("fname").value;
         if (x.trim() == "") {
             document.getElementById("test").innerHTML = "* You have entered invalid input! Please try again!";
-            return false;
+            return x;
         }
     }
 </script>
