@@ -111,7 +111,7 @@
                     <button type="submit" class="btn btn-outline-success" asp-page-handler="remove">Remove</button>
                 </div>
             </form>
-            <br/>
+            <br />
             <form id="form" method="post">
                 <div class="form-group col-6">
                     <label for="Items.ITEM" class="text-dark">New Item: </label>
@@ -134,7 +134,7 @@
 </div>
 
 
-<script>
+<script type="text/javascript">
     const form = document.getElementById('form');
     const input = document.getElementById('item');
     const alert = document.getElementById('message');
@@ -147,6 +147,6 @@
     }
 
     function submit(event) {
-        event.preventDefault();
+        //event.preventDefault();
     }
 </script>

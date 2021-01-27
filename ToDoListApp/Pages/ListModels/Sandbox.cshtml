@@ -7,14 +7,76 @@
 
 <br />
 <br />
-<div class="border backgroundwhite">
+
+
+<form id="form">
+    <div>
+        <input type="text" id="userInput" />
+        <span id="alert"></span>
+    </div>
+    <button id="btn" type="submit">Submit</button>
+</form>
+
+<script>
+    btn.onclick = test;
+
+    var text = document.getElementById("userInput").value;
+
+    function test() {
+
+        if (text === "123") {
+            document.getElementById("alert").innerHTML = "Input is valid!";
+        }
+        else {
+            document.getElementById("alert").innerHTML = text;
+            event.preventDefault();
+        }
+    }
+    
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<div class="border backgroundwhite">
     <div class="row">
         <div class="col-6">
             <h2 class="text">My Items</h2>
         </div>
         <div class="col-6 text-right">
             <a href="" class="btn btn-outline-success">
-               
+
             </a>
         </div>
     </div>
@@ -52,7 +114,7 @@
 
     function getCheckboxes() {
 
-  
+
         var theCheckboxes = document.querySelectorAll('input[type=checkbox]');
 
         for (var i = 0; i < theCheckboxes.length; i++) {
@@ -65,4 +127,4 @@
             }
         }
     }
-</script>
+</script>-->
