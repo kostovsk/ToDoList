@@ -11,19 +11,20 @@
 
 <form id="form">
     <div>
-        <input type="text" id="userInput" />
+        <input type="text" id="inp" />
         <span id="alert"></span>
     </div>
     <button id="btn" type="submit">Submit</button>
 </form>
 
 <script>
+    var btn = document.getElementById('btn');
+    var inp = document.getElementById('inp');
+
     btn.onclick = test;
 
-    var text = document.getElementById("userInput").value;
-
     function test() {
-
+        var text = inp.value;
         if (text === "123") {
             document.getElementById("alert").innerHTML = "Input is valid!";
         }
@@ -32,7 +33,6 @@
             event.preventDefault();
         }
     }
-    
 </script>
 
 
