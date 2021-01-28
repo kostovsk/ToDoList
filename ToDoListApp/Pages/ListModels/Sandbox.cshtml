@@ -20,16 +20,24 @@
 <script>
     var btn = document.getElementById('btn');
     var inp = document.getElementById('inp');
+    var regex = /[ `!#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
     btn.onclick = test;
 
     function test() {
         var text = inp.value;
-        if (text === "123") {
-            document.getElementById("alert").innerHTML = "Input is valid!";
+        if (text.trim() != "") {
+            var isValid = regex.test(text);
+            if (!isValid) {
+                document.getElementById('alert').innerHTML = "Input is valid!";
+            }
+            else {
+                document.getElementById('alert').innerHTML = "Input is invalid";
+                event.preventDefault();
+            }
         }
         else {
-            document.getElementById("alert").innerHTML = text;
+            document.getElementById('alert').innerHTML = "Input is invalid";
             event.preventDefault();
         }
     }
