@@ -8,16 +8,40 @@
 <form method="post">
     <div class="form-group">
         <label for="ToDoList.NAME">Name</label>
-        <input type="text" class="form-control" asp-for="ToDoList.NAME">
-        <span asp-validation-for="ToDoList.NAME"></span>
+        <input type="text" id="name" class="form-control" asp-for="ToDoList.NAME">
+        <span class="text-danger" id="message"></span>
     </div>
    
     <div class="btn-group">
-        <button type="submit" class="btn btn-outline-primary" asp-page-handler="submit">Submit</button>
+        <button type="submit" id="bttn" class="btn btn-outline-primary" asp-page-handler="submit">Submit</button>
     </div>
 </form>
 
 
-@section Scripts{
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-}
+<script type="text/javascript">
+    var input = document.getElementById('name');
+    var button = document.getElementById('bttn');
+    var alert = document.getElementById('message');
+    var regex = /[`!@@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+
+    button.onclick = test;
+
+    function test() {
+        var text = input.value;
+        if (text.trim() != "") {
+            var isValid = regex.test(text);
+            if (!isValid) {
+                alert.removeAttribute('class');
+                alert.innerHTML = "Saving..."
+            }
+            else {
+                alert.innerHTML = "* Input is invalid! Try again!";
+                event.preventDefault();
+            }
+        }
+        else {
+            alert.innerHTML = "* Input is invalid! Try again!";
+            event.preventDefault();
+        }
+    }
+</script>
