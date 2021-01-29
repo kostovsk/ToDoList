@@ -137,6 +137,7 @@
 <script type="text/javascript">
     var input = document.getElementById('item');
     var button = document.getElementById('bttn');
+    var alert = document.getElementById('message');
     var regex = /[`!@@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
     button.onclick = test;
@@ -146,17 +147,17 @@
         if (text.trim() != "") {
             var isValid = regex.test(text);
             if (!isValid) {
-                document.getElementById('message').innerHTML = "* Input is valid!";
+                alert.removeAttribute('class');
+                alert.innerHTML = "Saving...";
             }
             else {
-                document.getElementById('message').innerHTML = "* Input is invalid!";
+                alert.innerHTML = "* Input is invalid! Try again!";
                 event.preventDefault();
             }
         }
         else {
-            document.getElementById('message').innerHTML = "* Input is invalid!";
+            alert.innerHTML = "* Input is invalid! Try again!";
             event.preventDefault();
         }
     }
-
 </script>
