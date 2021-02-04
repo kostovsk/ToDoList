@@ -26,6 +26,7 @@ namespace ToDoListApp.Pages.ListModels
       public Items Items { get; set; }
       [BindProperty]
       public List<int> AreChecked { get; set; }
+      [BindProperty]
       public int DropDownListId { get; set; }
 
 
@@ -103,7 +104,6 @@ namespace ToDoListApp.Pages.ListModels
 
       public async Task<IActionResult> OnPostCopyTo()
       {
-         
          var myId = Request.Form["dropdown"];
 
          await _db.SaveChangesAsync();
