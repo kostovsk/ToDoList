@@ -110,6 +110,16 @@
                 <div class="btn-group mr-2">
                     <button type="submit" class="btn btn-outline-success" asp-page-handler="remove">Remove</button>
                 </div>
+                <label>Choose a list:</label>
+                <select class="accordion" name="list" id="dropdown">
+                    @foreach (var item in Model.ToDoListAllItems)
+                    {
+                        <option value="@item.LIST_ID">@item.NAME</option>
+                    }
+                </select>
+                <div class="btn-group mr-2">
+                    <button type="submit" class="btn btn-outline-info" asp-page-handler="copyto">Copy</button>
+                </div>
             </form>
             <br />
             <form id="form" method="post">

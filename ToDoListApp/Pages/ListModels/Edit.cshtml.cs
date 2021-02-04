@@ -20,11 +20,13 @@ namespace ToDoListApp.Pages.ListModels
       }
 
       public ToDoList ToDoList { get; set; }
+      public IList<ToDoList> ToDoListAllItems { get; set; }
       public IList<Items> ArrayItems { get; set; }
       [BindProperty]
       public Items Items { get; set; }
       [BindProperty]
       public List<int> AreChecked { get; set; }
+      public int DropDownListId { get; set; }
 
 
       public async Task<IActionResult> OnGet(int? id)
@@ -46,6 +48,8 @@ namespace ToDoListApp.Pages.ListModels
                return RedirectToPage("NewToDoList");
             }
          }
+
+         ToDoListAllItems = await _db.ToDoList.ToListAsync();
 
          ToDoList = _db.ToDoList
             .Single(x => x.LIST_ID == id);
@@ -95,6 +99,15 @@ namespace ToDoListApp.Pages.ListModels
 
          await _db.SaveChangesAsync();
          return RedirectToPage("Edit", new { id = listId });
+      }
+
+      public async Task<IActionResult> OnPostCopyTo()
+      {
+         
+         var myId = Request.Form["dropdown"];
+
+         await _db.SaveChangesAsync();
+         return RedirectToPage("NewToDoList");
       }
    }
 }
