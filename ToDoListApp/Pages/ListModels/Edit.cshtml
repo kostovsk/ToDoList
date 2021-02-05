@@ -111,7 +111,7 @@
                     <button type="submit" class="btn btn-outline-success" asp-page-handler="remove">Remove</button>
                 </div>
                 <label>Choose a list:</label>
-                <select class="accordion" name="list" id="dropdownform">
+                <select class="accordion" name="number">
                     @foreach (var item in Model.ToDoListAll)
                     {
                         <option value="@item.LIST_ID">@item.NAME</option>

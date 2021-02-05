@@ -26,6 +26,8 @@ namespace ToDoListApp.Pages.ListModels
       public Items Items { get; set; }
       [BindProperty]
       public List<int> AreChecked { get; set; }
+      [BindProperty]
+      public int Number { get; set; }
 
 
       public async Task<IActionResult> OnGet(int? id)
@@ -102,7 +104,8 @@ namespace ToDoListApp.Pages.ListModels
 
       public async Task<IActionResult> OnPostCopyTo()
       {
-         //var myId = Request.Form["dropdownform"];
+         //var myID = Request.Form["number"];
+         int myId = Number;
 
          for (int i = 0; i < AreChecked.Count; i++)
          {
@@ -112,14 +115,14 @@ namespace ToDoListApp.Pages.ListModels
                {
                   Items TempItem = new Items();
                   TempItem.ITEM = item.ITEM;
-                  TempItem.LIST_ID = 2016;
+                  TempItem.LIST_ID = myId;
                   _db.Items.Add(TempItem);
                }
             }
          }
 
          await _db.SaveChangesAsync();
-         return RedirectToPage("NewToDoList");
+         return RedirectToPage("Edit", new { id = myId });
       }
    }
 }
