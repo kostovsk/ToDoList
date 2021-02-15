@@ -55,7 +55,7 @@
                                 <a class="btn btn-outline-secondary" href="View?Id=@item.LIST_ID.ToString()">
                                     View
                                 </a>
-                                <a class="btn btn-outline-danger" href="Delete?Id=@item.LIST_ID.ToString()">
+                                <a class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete?');" href="Delete?Id=@item.LIST_ID.ToString()">
                                     Delete
                                 </a>
                             </div>
