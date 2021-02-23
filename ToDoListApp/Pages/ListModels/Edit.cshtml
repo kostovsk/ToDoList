@@ -83,7 +83,7 @@
         }
         else
         {
-        <form method="post">
+        <form id="items" method="post">
             <table class="table table-striped border">
                 <tr class="table-secondary">
                     <th style="width:20px">
@@ -97,7 +97,7 @@
                     </th>
                 </tr>
                 @foreach (var item in Model.ArrayItems)
-                    {
+                {
                 <tr>
                     <td style="width:20px">
                         <input name="AreChecked" type="checkbox" id="@item.ITEM_ID" value="@item.ITEM_ID" />
@@ -109,23 +109,8 @@
                         <label for="@item.ITEM_ID">@item.ITEM</label>
                     </td>
                 </tr>
-                    }
+                }
             </table>
-            <div class="btn-group mr-2" style="position:relative; left:98px; top:186px">
-                <button type="submit" class="btn btn-outline-success" asp-page-handler="remove">Remove</button>
-            </div>
-            <div style="position:relative; left:198px; top:148px">
-                <label>Choose a list:</label>
-                <select class="accordion" name="number">
-                    @foreach (var item in Model.ToDoListAll)
-                    {
-                    <option value="@item.LIST_ID">@item.NAME</option>
-                    }
-                </select>
-                <div class="btn-group mr-2">
-                    <button type="submit" class="btn btn-outline-info" asp-page-handler="copyto">Copy</button>
-                </div>
-            </div>
         </form>
         <br />
         <form id="form" method="post">
@@ -139,7 +124,21 @@
                 <div class="btn-group mr-2">
                     <button type="submit" id="bttn" class="btn btn-outline-primary" asp-page-handler="submit">Add Item</button>
                 </div>
-                <div class="btn-group mr-2" style="position:relative; left:865px">
+                <div class="btn-group mr-2">
+                    <button type="submit" form="items" class="btn btn-outline-success" asp-page-handler="remove">Remove</button>
+                </div>
+                <div>
+                    <select class="accordion" form="items" name="number">
+                        @foreach (var item in Model.ToDoListAll)
+                    {
+                        <option value="@item.LIST_ID">@item.NAME</option>
+                    }
+                    </select>
+                    <div class="btn-group mr-2">
+                        <button type="submit" form="items" class="btn btn-outline-info" asp-page-handler="copyto">Copy</button>
+                    </div>
+                </div>
+                <div class="btn-group mr-2">
                     <a class="btn btn-outline-info" href="NewToDoList">Back to Lists</a>
                 </div>
             </div>

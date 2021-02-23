@@ -104,7 +104,7 @@ namespace ToDoListApp.Pages.ListModels
 
       public async Task<IActionResult> OnPostCopyTo()
       {
-         //var myID = Request.Form["number"];
+         //var myId = Request.Form["number"];
          int myId = Number;
 
          for (int i = 0; i < AreChecked.Count; i++)
