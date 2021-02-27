@@ -59,7 +59,7 @@
                                 <a class="btn btn-outline-secondary" href="View?Id=@item.LIST_ID.ToString()">
                                     View
                                 </a>
-                                <a class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete?');" href="Delete?Id=@item.LIST_ID.ToString()">
+                                <a class="btn btn-outline-danger" onclick="return conf()" href="Delete?Id=@item.LIST_ID.ToString()">
                                     Delete
                                 </a>
                             </div>
@@ -70,3 +70,13 @@
         }
     </div>
     </div>
+
+<script type="text/javascript">
+    function conf() {
+        if (confirm("Are you sure you want to delete this?")) {
+
+        } else {
+            event.preventDefault();
+        }
+    }
+</script>

@@ -125,7 +125,7 @@
                     <button type="submit" id="bttn" class="btn btn-outline-primary" asp-page-handler="submit">Add Item</button>
                 </div>
                 <div class="btn-group mr-2">
-                    <button type="submit" form="items" class="btn btn-outline-danger" asp-page-handler="remove">Remove</button>
+                    <button type="submit" form="items" onclick="return conf()" class="btn btn-outline-danger" asp-page-handler="remove">Remove</button>
                 </div>
                 <div>
                     <select class="accordion" form="items" name="number">
@@ -172,6 +172,14 @@
         }
         else {
             alert.innerHTML = "* Input is invalid! Try again!";
+            event.preventDefault();
+        }
+    }
+
+    function conf() {
+        if (confirm("Are you sure you want to delete this?")) {
+
+        } else {
             event.preventDefault();
         }
     }
