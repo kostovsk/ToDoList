@@ -15,7 +15,6 @@ namespace ToDoListApp.Data
       {
       }
 
-      public DbSet<ListModel> ListModel { get; set; }
       public DbSet<ToDoList> ToDoList { get; set; }
       public DbSet<Items> Items { get; set; }
    }
