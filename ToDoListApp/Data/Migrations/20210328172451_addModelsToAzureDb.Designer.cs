@@ -10,14 +10,14 @@ using ToDoListApp.Data;
 namespace ToDoListApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201129185442_addListModelToDb")]
-    partial class addListModelToDb
+    [Migration("20210328172451_addModelsToAzureDb")]
+    partial class addModelsToAzureDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.8")
+                .HasAnnotation("ProductVersion", "3.1.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -221,43 +221,42 @@ namespace ToDoListApp.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ToDoListApp.Models.Item", b =>
+            modelBuilder.Entity("ToDoListApp.Models.Items", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("ITEM_ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Entry")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ListModelId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ListModelId");
-
-                    b.ToTable("Item");
-                });
-
-            modelBuilder.Entity("ToDoListApp.Models.ListModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("ITEM")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<int>("LIST_ID")
+                        .HasColumnType("int");
 
-                    b.ToTable("ListModel");
+                    b.HasKey("ITEM_ID");
+
+                    b.ToTable("Items");
+                });
+
+            modelBuilder.Entity("ToDoListApp.Models.ToDoList", b =>
+                {
+                    b.Property<int>("LIST_ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DATE_CREATED")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NAME")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("LIST_ID");
+
+                    b.ToTable("ToDoList");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -309,13 +308,6 @@ namespace ToDoListApp.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("ToDoListApp.Models.Item", b =>
-                {
-                    b.HasOne("ToDoListApp.Models.ListModel", null)
-                        .WithMany("ListItems")
-                        .HasForeignKey("ListModelId");
                 });
 #pragma warning restore 612, 618
         }
