@@ -40,6 +40,7 @@ namespace ToDoListApp
          services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
              .AddEntityFrameworkStores<ApplicationDbContext>();
          services.AddRazorPages().AddRazorRuntimeCompilation();
+         services.AddControllers();
       }
 
       // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,6 +69,7 @@ namespace ToDoListApp
          app.UseEndpoints(endpoints =>
          {
             endpoints.MapRazorPages();
+            endpoints.MapControllers();
          });
       }
    }

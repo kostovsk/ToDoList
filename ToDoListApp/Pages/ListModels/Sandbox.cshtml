@@ -17,8 +17,50 @@
     <button id="btn" type="submit">Submit</button>
 </form>
 
+<table>
+    <tr>
+        <th>List</th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tbody id="todolist"></tbody>
+</table>
+
 <script>
-    var btn = document.getElementById('btn');
+    const uri = 'api/ToDoList';
+    let todolist = [];
+
+    function getItems() {
+        fetch(uri)
+            .then(response => response.json())
+            .then(data => _displayList(data))
+            .catch(error => console.error('Unable to get lists.', error));
+    }
+
+    function _displayList(data) {
+        const tBody = document.getElementById('todolist');
+        tBody.innerHTML = '';
+
+        data.forEach(item => {
+            let td1 = tr.insertCell(0);
+            let textNode1 = document.createTextNode(item.LIST_ID);
+
+            let td2 = tr.insertCell(1);
+            let textNode2 = document.createTextNode(item.NAME);
+
+            let td3 = tr.insertCell(2);
+            let textNode3 = document.createTextNode(item.DATE_CREATED)
+        });
+
+        todolist = data;
+    }
+</script>
+
+<script type="text/javascript">
+    getItems();
+</script>
+
+    @*var btn = document.getElementById('btn');
     var inp = document.getElementById('inp');
     var regex = /[ `!@@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
 
@@ -40,8 +82,10 @@
             document.getElementById('alert').innerHTML = "Input is invalid";
             event.preventDefault();
         }
-    }
-</script>
+    }*@
+
+
+
 
 
 
