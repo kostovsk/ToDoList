@@ -26,5 +26,16 @@ namespace ToDoListApp.Controllers
       {
          return await _db.ToDoList.ToListAsync();
       }
+
+      [HttpPost]
+      public async Task<ActionResult<ToDoList>> AddToDoList(ToDoList todoList)
+      {
+         todoList.DATE_CREATED = DateTime.Now;
+
+         _db.ToDoList.Add(todoList);
+         await _db.SaveChangesAsync();
+
+         return NoContent();
+      }
    }
 }

@@ -16,7 +16,14 @@
     </div>
     <button id="btn" type="submit">Submit</button>
 </form>
-
+<br />
+<div id="inputForm">
+    <form action="javascript:void(0);" method="POST" onsubmit="addList()">
+        <input type="text" id="add-list" />
+        <input type="submit" value="Add" />
+    </form>
+</div>
+<br />
 <table>
     <tr>
         <th>List</th>
@@ -25,6 +32,8 @@
     </tr>
     <tbody id="todolist"></tbody>
 </table>
+
+
 
 <script>
     const uri = 'https://localhost:44306/api/ToDoList';
@@ -35,6 +44,29 @@
             .then(response => response.json())
             .then(data => _displayList(data))
             .catch(error => console.error('Unable to get lists.', error));
+    }
+
+    function addList() {
+        const addListTextBox = document.getElementById('add-list');
+
+        const listName = {
+            name: addListTextBox.value.trim()
+        };
+
+        fetch(uri, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(listName)
+        })
+            .then(response => response.json())
+            .then(() => {
+                getItems();
+                addListTextBox.value = '';
+            })
+            .catch(error => console.error('Unable to add list.', error));
     }
 
     function _displayList(data) {
