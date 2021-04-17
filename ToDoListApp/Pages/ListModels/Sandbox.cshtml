@@ -18,9 +18,10 @@
 </form>
 <br />
 <div id="inputForm">
+    <input type="submit" value="Add List" id="add-form-btn" onclick="openInputField()" />
     <form action="javascript:void(0);" method="POST" onsubmit="addList()">
-        <input type="text" id="add-list" />
-        <input type="submit" value="Add" />
+        <input type="hidden" id="add-list" />
+        <input type="hidden" id="submit-btn" value="Add" />
     </form>
 </div>
 <br />
@@ -90,6 +91,17 @@
         });
 
         todolist = data;
+    }
+
+    function openInputField() {
+        var addListButton = document.getElementById('add-form-btn');
+        addListButton.setAttribute('type', 'hidden');
+
+        var inputText = document.getElementById('add-list');
+        inputText.setAttribute('type', 'text');
+
+        var submitBtn = document.getElementById('submit-btn');
+        submitBtn.setAttribute('type', 'submit');
     }
 </script>
 
