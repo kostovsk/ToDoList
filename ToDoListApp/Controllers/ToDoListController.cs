@@ -27,6 +27,19 @@ namespace ToDoListApp.Controllers
          return await _db.ToDoList.ToListAsync();
       }
 
+      [HttpGet("{id}")]
+      public async Task<ActionResult<ToDoList>> GetToDoListSingle(int id)
+      {
+         var todoList = await _db.ToDoList.FindAsync(id);
+
+         if (todoList == null)
+         {
+            return NotFound();
+         }
+
+         return todoList;
+      }
+
       [HttpPost]
       public async Task<ActionResult<ToDoList>> AddToDoList(ToDoList todoList)
       {
@@ -35,7 +48,10 @@ namespace ToDoListApp.Controllers
          _db.ToDoList.Add(todoList);
          await _db.SaveChangesAsync();
 
-         return NoContent();
+         return CreatedAtAction(
+            nameof(GetToDoListSingle),
+            new { id = todoList.LIST_ID },
+            todoList);
       }
    }
 }
