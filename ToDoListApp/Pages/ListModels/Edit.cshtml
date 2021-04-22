@@ -66,8 +66,7 @@
         </div>
         <form id="form" method="post">
             <div class="form-group col-6">
-                <label for="Items.ITEM" class="text-dark">New Item: </label>
-                <input type="text" id="item" class="form-control" asp-for="Items.ITEM" />
+                <input type="text" id="item" class="form-control" placeholder="Enter New Item" asp-for="Items.ITEM" />
                 <input type="hidden" asp-for="Items.LIST_ID" value="@testQueryStringID" />
                 <span class="text-danger" id="message"></span>
             </div>
@@ -115,8 +114,10 @@
         <br />
         <form id="form" method="post">
             <div class="form-group col-6">
-                <label for="Items.ITEM" class="text-dark">New Item: </label>
-                <input type="text" id="item" class="form-control" asp-for="Items.ITEM" />
+                <button type="button" id="plus_btn" style="visibility:visible" class="btn btn-outline-info btn-sm" onclick="inputFieldVisible()">
+                    <span>&#43;</span>
+                </button>
+                <input type="hidden" id="item" class="form-control" placeholder="Enter New Item" asp-for="Items.ITEM" />
                 <input type="hidden" asp-for="Items.LIST_ID" value="@testQueryStringID" />
                 <span class="text-danger" id="message"></span>
             </div>
@@ -153,6 +154,7 @@
     var input = document.getElementById('item');
     var button = document.getElementById('bttn');
     var alert = document.getElementById('message');
+    var plus = document.getElementById('plus_btn');
     var regex = /[`!@@#$%^&*()_+\-=\[\]{};'"\\|,<>\/?~]/;
 
     button.onclick = test;
@@ -174,6 +176,11 @@
             alert.innerHTML = "* Input is invalid! Try again!";
             event.preventDefault();
         }
+    }
+
+    function inputFieldVisible() {
+        input.type = "text";
+        plus.style.visibility = "hidden";
     }
 
     function conf() {
