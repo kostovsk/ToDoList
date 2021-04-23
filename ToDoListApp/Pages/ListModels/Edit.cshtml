@@ -82,41 +82,40 @@
         }
         else
         {
-        <form id="items" method="post">
-            <table class="table table-striped border">
-                <tr class="table-secondary">
-                    <th style="width:20px">
-                        <label>Select</label>
-                    </th>
-                    <!--<th>
-                        <label>Id</label>
-                    </th>-->
-                    <th>
-                        <label>Item</label>
-                    </th>
-                </tr>
-                @foreach (var item in Model.ArrayItems)
-                {
+    <form id="items" method="post">
+        <table class="table table-striped border">
+            <tr class="table-secondary">
+                <th style="width:20px">
+                    <label>Select</label>
+                </th>
+                <!--<th>
+            <label>Id</label>
+        </th>-->
+                <th>
+                    <label>Item</label>
+                </th>
+            </tr>
+            @foreach (var item in Model.ArrayItems)
+            {
                 <tr>
                     <td style="width:20px">
                         <input name="AreChecked" type="checkbox" id="@item.ITEM_ID" value="@item.ITEM_ID" />
                     </td>
                     <!--<td>
-                        <label for="@item.ITEM_ID">@item.ITEM_ID</label>
-                    </td>-->
+                <label for="@item.ITEM_ID">@item.ITEM_ID</label>
+            </td>-->
                     <td>
                         <label for="@item.ITEM_ID">@item.ITEM</label>
                     </td>
                 </tr>
-                }
-            </table>
-        </form>
-        <br />
+            }
+        </table>
+        <button type="button" id="plus_btn" style="visibility:visible; display:block; width:100%" class="btn btn-outline-info btn-sm" onclick="inputFieldVisible()">
+            <span>&#43;</span>
+        </button>
+    </form>
         <form id="form" method="post">
             <div class="form-group col-6">
-                <button type="button" id="plus_btn" style="visibility:visible" class="btn btn-outline-info btn-sm" onclick="inputFieldVisible()">
-                    <span>&#43;</span>
-                </button>
                 <input type="hidden" id="item" class="form-control" placeholder="Enter New Item" asp-for="Items.ITEM" />
                 <input type="hidden" asp-for="Items.LIST_ID" value="@testQueryStringID" />
                 <span class="text-danger" id="message"></span>
