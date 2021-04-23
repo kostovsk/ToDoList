@@ -53,5 +53,34 @@ namespace ToDoListApp.Controllers
             new { id = todoList.LIST_ID },
             todoList);
       }
+
+      [HttpPut("{id}")]
+      public async Task<IActionResult> UpdateToDoList(int id, ToDoList toDoList)
+      {
+         if (id != toDoList.LIST_ID)
+         {
+            return BadRequest();
+         }
+
+         var toDoItem = await _db.ToDoList.FindAsync(id);
+         if (toDoItem == null)
+         {
+            return NotFound();
+         }
+
+         toDoItem.NAME = toDoList.NAME;
+
+         try
+         {
+            await _db.SaveChangesAsync();
+         }
+         catch (DbUpdateConcurrencyException)
+         {
+
+            return NotFound();
+         }
+
+         return NoContent();
+      }
    }
 }
