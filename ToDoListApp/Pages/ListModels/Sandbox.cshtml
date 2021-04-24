@@ -25,6 +25,15 @@
     </form>
 </div>
 <br />
+<div id="editForm" style="display:none">
+    <form action="javascript:void(0);" onsubmit="updateItem()">
+        <input type="hidden" id="edit-id" />
+        <input type="text" id="edit-item" />
+        <input type="submit" value="Save" />
+        <a onclick="closeEditForm()" aria-label="Close">&#10006;</a>
+    </form>
+</div>
+<br />
 <table>
     <tr>
         <th>List</th>
@@ -70,11 +79,56 @@
             .catch(error => console.error('Unable to add list.', error));
     }
 
+    function updateItem() {
+        const itemId = document.getElementById('edit-id').value;
+        const item = {
+            lisT_ID: parseInt(itemId),
+            name: document.getElementById('edit-item').value.trim()
+        };
+
+        fetch(`${uri}/${itemId}`, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(item)
+        })
+            .then(() => getItems())
+            .catch(error => console.error('Unable to update item.', error));
+
+        closeEditForm();
+
+        return false;
+    }
+
+    function displayEditForm(id) {
+        const item = todolist.find(item => item.lisT_ID === id);
+
+        document.getElementById('edit-item').value = item.name;
+        document.getElementById('edit-id').value = item.lisT_ID;
+        document.getElementById('editForm').style.display = 'block';
+    }
+
+    function closeEditForm() {
+        document.getElementById('editForm').style.display = 'none';
+    }
+
     function _displayList(data) {
         const tBody = document.getElementById('todolist');
         tBody.innerHTML = '';
 
+        const button = document.createElement('button');
+
         data.forEach(item => {
+            let editBtn = button.cloneNode(false);
+            editBtn.innerText = 'Edit';
+            editBtn.setAttribute('onclick', `displayEditForm(${item.lisT_ID})`);
+
+            let deleteBtn = button.cloneNode(false);
+            deleteBtn.innerText = 'Delete';
+            deleteBtn.setAttribute('onclick', `deleteItem(${item.lisT_ID})`);
+
             let tr = tBody.insertRow();
 
             let td1 = tr.insertCell(0);
@@ -86,8 +140,10 @@
             td2.appendChild(textNode2);
 
             let td3 = tr.insertCell(2);
-            let textNode3 = document.createTextNode(item.datE_CREATED);
-            td3.appendChild(textNode3);
+            td3.appendChild(editBtn);
+
+            let td4 = tr.insertCell(3);
+            td4.appendChild(deleteBtn);
         });
 
         todolist = data;
