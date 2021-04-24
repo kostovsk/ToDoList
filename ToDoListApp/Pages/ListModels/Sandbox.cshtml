@@ -102,6 +102,14 @@
         return false;
     }
 
+    function deleteItem(id) {
+        fetch(`${uri}/${id}`, {
+            method: 'DELETE'
+        })
+            .then(() => getItems())
+            .catch(error => console.error('Unabel to delete item.', error));
+    }
+
     function displayEditForm(id) {
         const item = todolist.find(item => item.lisT_ID === id);
 

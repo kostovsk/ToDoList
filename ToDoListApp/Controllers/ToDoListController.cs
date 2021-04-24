@@ -82,5 +82,21 @@ namespace ToDoListApp.Controllers
 
          return NoContent();
       }
+
+      [HttpDelete("{id}")]
+      public async Task<IActionResult> DeleteToDoList(int id)
+      {
+         var toDoList = await _db.ToDoList.FindAsync(id);
+
+         if (toDoList == null)
+         {
+            return NotFound();
+         }
+
+         _db.ToDoList.Remove(toDoList);
+         await _db.SaveChangesAsync();
+
+         return NoContent();
+      }
    }
 }
